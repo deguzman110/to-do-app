@@ -1,48 +1,47 @@
 function onReady() {
-    const addToDoForm = document.getElementById('addToDoForm');
-    const newToDoText = document.getElementById('newToDoText');
-    const toDoList = document.getElementById('toDoList');
-    const deleteButton = document.getElementById('deleteButton'); //accesses the element deleteButton
+    const ADDTODO_FORM = document.getElementById('addToDoForm');
+    const NEWTODO_TEXT = document.getElementById('newToDoText');
+    const TODO_LIST = document.getElementById('toDoList');
 
     addToDoForm.addEventListener('submit', event => {
       event.preventDefault();
 
       // get the text
-      let title = newToDoText.value;
+      let title = NEWTODO_TEXT.value;
 
       //create a new li
       let newLi = document.createElement('li');
 
       //create a new input
       let checkbox = document.createElement('input');
-
       //set the input's type to checkbox
       checkbox.type = 'checkbox';
+
+      // create a delete button
+      let deleteBtn = document.createElement('button');
+      deleteBtn.innerText = "Delete"
+      deleteBtn.classList = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent delete-btn";
+
+      deleteBtn.addEventListener('click', function() {
+        event.preventDefault(); //Prevents default reload behavior
+
+        // delete the current LI
+        TODO_LIST.removeChild(this.parentElement);
+      });
+
 
       //set the title
       newLi.textContent = title;
 
       //attach the checkbox to the li
       newLi.appendChild(checkbox);
+      newLi.appendChild(deleteBtn);
 
       //attach the li to the ul
-      toDoList.appendChild(newLi);
+      TODO_LIST.appendChild(newLi);
 
       //empty the input
-      newToDoText.value = '';
-    });
-
-    //deleteButton function
-    //adds click event listner on delete button
-    deleteButton.addEventListener('click', function() {
-      event.preventDefault(); //Prevents default reload behavior
-
-      // for every li, as long as there are list items at i position, it will remove it.
-      for (i = toDoList.children.length - 1; i >= 0; i--) {
-        if (toDoList.children[i].children[0]) {
-          toDoList.removeChild(toDoList.children[i])
-        }
-      }
+      NEWTODO_TEXT.value = '';
     });
 }
 
