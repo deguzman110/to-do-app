@@ -1,0 +1,13 @@
+input[type="text"] {
+  border-radius: 5px;
+  border: 1px solid #000000;
+  padding: 10px;
+  box-sizing: border-box;
+  width: auto;
+}
+
+body {
+  color: #ffffff;
+  background-color: #333333;
+  padding-left: 20px;
+}
